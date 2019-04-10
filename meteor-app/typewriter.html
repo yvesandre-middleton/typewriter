@@ -9,15 +9,19 @@
   <script>
 
     function preparePage() {
+      console.log("preparepage");
       if (document.URL.indexOf("editor") == -1) {
         return;
       }
+      console.log("preparepage2");
 
       document.getElementById("synced-display").style.display = "none";
 
       document.getElementById("text-editor").innerHTML = document.getElementById("synced-display").innerHTML;
 
       document.getElementById("text-editor").style.display = "block";
+      document.getElementById("text-editor").focus();
+      console.log("Ready");
     }
 
     document.getElementById("text-editor").onkeyup = function () {

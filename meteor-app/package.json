@@ -1,0 +1,16 @@
+{
+  "name": "meteor-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "typewriter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/runtime": "^7.4.3",
+    "caret-pos": "^1.2.1",
+    "meteor-node-stubs": "^0.4.1"
+  }
+}
