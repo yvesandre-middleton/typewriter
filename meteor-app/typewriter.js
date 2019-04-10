@@ -17,7 +17,22 @@ function updateText(newText) {
 if (Meteor.isClient) {
   Template.body.helpers({
     text: function () {
-      return Texts.findOne({}, {sort: {createdAt: -1}});
+      var txt = Texts.findOne({}, {sort: {createdAt: -1}});
+      if (txt) {
+        return txt.text
+          .replace(/&/g, "&amp;") //escape html...
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;")
+          .replace(/\n/g,'<br/>'); //except for the bit we need
+      } else {
+        return "";
+      }
+    },
+    rawtext: function () {
+      var txt = Texts.findOne({}, {sort: {createdAt: -1}});
+      return (txt ? txt.text : "");
     },
   });
 

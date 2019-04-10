@@ -28,3 +28,7 @@ html, body {
   height:1em;
   background-color:#f00;
 }
+
+#raw-text {
+  display:none;
+}
