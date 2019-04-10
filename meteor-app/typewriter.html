@@ -5,15 +5,14 @@
 <body>
   <div id="synced-display">{{{text.text}}}</div>
   <div id="text-editor" contenteditable="true"></div>
+  <div id='cursor' style='left:{{text.left}}px;top:{{text.top}}px;height:{{text.height}}px'></div>
   <button id="sync-button"></button>
   <script>
 
     function preparePage() {
-      console.log("preparepage");
       if (document.URL.indexOf("editor") == -1) {
         return;
       }
-      console.log("preparepage2");
 
       document.getElementById("synced-display").style.display = "none";
 

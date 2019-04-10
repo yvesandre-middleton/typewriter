@@ -16,3 +16,10 @@
 #synced-display {
   margin-bottom:500px;
 }
+
+#cursor {
+  position: absolute;
+  width:3px;
+  height:1em;
+  background-color:#f00;
+}
