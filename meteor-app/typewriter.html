@@ -4,8 +4,7 @@
 
 <body>
   <div id="synced-display">{{{text.text}}}</div>
-  <div id="text-editor" contenteditable="true"></div>
-  <div id='cursor' style='left:{{text.left}}px;top:{{text.top}}px;height:{{text.height}}px'></div>
+  <textarea id="text-editor"></textarea>
   <button id="sync-button"></button>
   <script>
 
@@ -16,11 +15,10 @@
 
       document.getElementById("synced-display").style.display = "none";
 
-      document.getElementById("text-editor").innerHTML = document.getElementById("synced-display").innerHTML;
+      document.getElementById("text-editor").value = document.getElementById("synced-display").innerHTML.replace('\u0338',"");
 
       document.getElementById("text-editor").style.display = "block";
       document.getElementById("text-editor").focus();
-      console.log("Ready");
     }
 
     document.getElementById("text-editor").onkeyup = function () {

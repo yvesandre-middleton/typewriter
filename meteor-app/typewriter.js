@@ -1,17 +1,14 @@
 import { position, offset } from 'caret-pos';
 
 Texts = new Mongo.Collection("texts");
-function updateText(newText,newLeft,newTop,newHeight) {
+function updateText(newText) {
   var theText = Texts.findOne({}, {sort: {createdAt: -1}});
 
   if (theText) {
-    Texts.update(theText._id, {$set: {text: newText, left: newLeft, top:newTop, height: newHeight}});
+    Texts.update(theText._id, {$set: {text: newText}});
   } else {
     theText = {};
     theText.text = newText;
-    theText.left = 0;
-    theText.top = 0;
-    theText.height = 0;
     Texts.insert(theText);
   }
 
@@ -27,11 +24,16 @@ if (Meteor.isClient) {
   Template.body.events({
     "click #sync-button": function (event) {
 
+      const cursor = '\u0338';
 
-      const input = document.querySelector('#text-editor');
-      const pos = position(input); // { left: 15, top: 30, height: 20, pos: 15 }
-      const cursorDiv = document.querySelector("#cursor");
-      updateText(document.getElementById("text-editor").innerHTML,pos.left+7,pos.top+7,pos.height);
+      var txt = document.getElementById("text-editor").value.replace("¦","");
+      var selStart = document.getElementById("text-editor").selectionStart;
+      var selEnd = document.getElementById("text-editor").selectionEnd;
+      txt = txt.substring(0,selStart) + cursor + txt.substring(selStart);
+      if (selEnd != selStart) {
+        txt = txt.substring(0,selEnd+1) + cursor + txt.substring(selEnd+1);
+      }
+      updateText(txt);
     }
   });
 
