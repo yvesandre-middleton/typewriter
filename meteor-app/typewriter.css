@@ -8,9 +8,14 @@
   display:none;
 }
 
+html, body {
+  height:90%;
+}
+
 #text-editor {
   display:none;
-
+  height:90%;
+  width:100%;
 }
 
 #synced-display {
