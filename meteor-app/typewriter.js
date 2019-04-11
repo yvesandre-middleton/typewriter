@@ -10,8 +10,6 @@ Texts = new Mongo.Collection("texts");
 // });
 
 function updateText(newText) {
-  console.log("text is " + newText);
-
   var theText = Texts.findOne({}, {sort: {createdAt: -1}});
 
   if (theText) {
@@ -51,17 +49,25 @@ if (Meteor.isClient) {
   Template.body.events({
     "click #sync-button": function (event) {
 
-      const cursor = '\u0338';
 
       var txt = document.getElementById("text-editor").value.replace("¦","");
       var selStart = document.getElementById("text-editor").selectionStart;
       var selEnd = document.getElementById("text-editor").selectionEnd;
-      txt = txt.substring(0,selStart) + cursor + txt.substring(selStart);
+
+      txt = addCursor(txt,selStart);
       if (selEnd != selStart) {
-        txt = txt.substring(0,selEnd+1) + cursor + txt.substring(selEnd+1);
+        txt = addCursor(txt,selEnd+1);
       }
+
       updateText(txt);
     }
   });
 
+}
+
+
+function addCursor(txt,pos) {
+  const cursor_overprint = '\u030C\u032D';
+  var cursedChar = txt.substring(pos-1,pos); //this is the character immediately behind the insert point
+  return txt.substring(0,pos) + cursor_overprint + txt.substring(pos);
 }

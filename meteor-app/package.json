@@ -10,7 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "@babel/runtime": "^7.4.3",
-    "caret-pos": "^1.2.1",
     "meteor-node-stubs": "^0.4.1"
   }
 }
