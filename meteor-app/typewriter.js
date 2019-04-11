@@ -1,7 +1,17 @@
-import { position, offset } from 'caret-pos';
+// const fs = require('fs');
 
 Texts = new Mongo.Collection("texts");
+
+// Meteor.methods({
+//   'save'({text}) {
+//     console.log("SAVING " + text);
+//     fs.writefile("test.txt",text);
+//   }
+// });
+
 function updateText(newText) {
+  console.log("text is " + newText);
+
   var theText = Texts.findOne({}, {sort: {createdAt: -1}});
 
   if (theText) {
@@ -12,6 +22,8 @@ function updateText(newText) {
     Texts.insert(theText);
   }
 
+  // Meteor.call('save',{text: newText});
+  
 }
 
 if (Meteor.isClient) {
