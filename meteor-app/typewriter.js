@@ -67,7 +67,8 @@ if (Meteor.isClient) {
 
 
 function addCursor(txt,pos) {
-  const cursor_overprint = '\u030C\u032D';
+  // const cursor = '\u030C\u032D';
+  const cursor = '¦';
   var cursedChar = txt.substring(pos-1,pos); //this is the character immediately behind the insert point
-  return txt.substring(0,pos) + cursor_overprint + txt.substring(pos);
+  return txt.substring(0,pos) + cursor + txt.substring(pos);
 }
