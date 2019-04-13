@@ -2,7 +2,7 @@
 
 Paperwrite is a Meteor app that brings distraction-free writing to the Kindle. 
 
-This fork is based on [http://www.shubhro.com/2015/01/30/writing-amazon-kindle/](Shubhro Saha's "typewriter"). It adds a visible cursor, and removes the separate backup process in favour of a (rather hacky) continuous write into text files on the server.
+This fork is based on [Shubhro Saha's "typewriter"](http://www.shubhro.com/2015/01/30/writing-amazon-kindle/). It adds a visible cursor, and removes the separate backup process in favour of a (rather hacky) continuous write into text files on the server.
 
 - Set PAPERWRITE_SAVE_PATH to a folder where you want the text files to be saved
 - Install [Node](http://nodejs.org/) and [Meteor](https://www.meteor.com/)
