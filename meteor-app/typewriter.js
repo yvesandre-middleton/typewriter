@@ -1,13 +1,49 @@
-// const fs = require('fs');
-
+const fs = require('fs');
 Texts = new Mongo.Collection("texts");
 
-// Meteor.methods({
-//   'save'({text}) {
-//     console.log("SAVING " + text);
-//     fs.writefile("test.txt",text);
-//   }
-// });
+var lockWriting = false;
+
+if (Meteor.isServer) {
+  var savePath = process.env.PAPERWRITE_SAVE_PATH;
+  if (savePath === undefined) {
+    console.log("Please set PAPERWRITE_SAVE_PATH to somewhere to save the output. Using /tmp until you do.");
+    savePath = "/tmp/";
+  }
+
+  loadTextFromFilesystem(); 
+}
+
+/* On startup, sync from filesystem, in case something else has changed it. Note that we never check this again,
+so if you keep the server running past midnight... */
+function loadTextFromFilesystem() {
+  fs.readFile(savePath + notesFileName(), 'utf8', Meteor.bindEnvironment((err,data) => {
+    if (err) {
+      console.log("Failed to load existing data ",err);
+      updateText("");
+    } else {
+      console.log("Loaded ",data);
+      updateText(data);
+    }
+  }));
+}
+
+
+Meteor.methods({
+  'save'({text}) {
+    if (!lockWriting) {
+      lockWriting = true;
+      fs.writeFile(savePath + notesFileName(),text, (e) => {lockWriting = false;});
+    } else {
+      console.log("WRITE SKIPPED due to lockWriting"); //TODO: Client should really debounce Save calls
+    }
+  }
+});
+
+/* Return eg 2019-04-10.txt, based on today's date */
+function notesFileName() {
+  var d = new Date();
+  return d.getFullYear().toString() + "-" + d.getMonth().toString().padStart(2,"0") + "-" + d.getDay().toString().padStart(2,"0") + ".txt";
+}
 
 function updateText(newText) {
   var theText = Texts.findOne({}, {sort: {createdAt: -1}});
@@ -20,7 +56,7 @@ function updateText(newText) {
     Texts.insert(theText);
   }
 
-  // Meteor.call('save',{text: newText});
+  Meteor.call('save',{text: newText});
   
 }
 
@@ -67,8 +103,8 @@ if (Meteor.isClient) {
 
 
 function addCursor(txt,pos) {
-  // const cursor = '\u030C\u032D';
-  const cursor = '¦';
+  // const cursor = '\u030C\u032D'; // neat idea, but doesn't work well on kindle
+  const cursor = '¦'; //causes the text to move, but not too much - it's ok
   var cursedChar = txt.substring(pos-1,pos); //this is the character immediately behind the insert point
   return txt.substring(0,pos) + cursor + txt.substring(pos);
 }

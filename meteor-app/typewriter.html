@@ -1,17 +1,18 @@
 <head>
-  <title>Typewriter for Kindle</title>
+  <title>Paperwrite</title>
   <!-- Nice try, but the kindle doesn't support user-scalable=no ... -->
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 </head>
 
 <body>
   <div id="synced-display">{{{text}}}</div>
-  <div style='height:20em'></div>
-  <!-- Div exists only so that you can scroll further on the kindle to get the cursor to the top of the screen. We can't 
-  autoscroll; the kindle supports neither scrollIntoView nor #anchors -->
   <div id="raw-text">{{{rawtext}}}</div>
   <textarea id="text-editor"></textarea>
   <button id="sync-button"></button>
+  <div style='height:20em'></div>
+  <!-- Div exists only so that you can scroll further on the kindle to get the cursor to the top of the screen. We can't 
+  autoscroll; the kindle supports neither scrollIntoView nor #anchors -->
+
   <script>
     function preparePage() {
       if (document.URL.indexOf("editor") == -1) {
@@ -20,7 +21,7 @@
 
       document.getElementById("synced-display").style.display = "none";
 
-      document.getElementById("text-editor").value = document.getElementById("raw-text").innerHTML.replace('\u0338',"");
+      document.getElementById("text-editor").value = document.getElementById("raw-text").innerHTML.replace('¦',"");
 
       document.getElementById("text-editor").style.display = "block";
       document.getElementById("text-editor").focus();
