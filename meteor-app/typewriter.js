@@ -105,6 +105,5 @@ if (Meteor.isClient) {
 function addCursor(txt,pos) {
   // const cursor = '\u030C\u032D'; // neat idea, but doesn't work well on kindle
   const cursor = '¦'; //causes the text to move, but not too much - it's ok
-  var cursedChar = txt.substring(pos-1,pos); //this is the character immediately behind the insert point
   return txt.substring(0,pos) + cursor + txt.substring(pos);
 }

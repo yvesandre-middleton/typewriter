@@ -18,17 +18,6 @@ html, body {
   width:100%;
 }
 
-#synced-display {
-  margin-bottom:500px;
-}
-
-#cursor {
-  position: absolute;
-  width:3px;
-  height:1em;
-  background-color:#f00;
-}
-
 #raw-text {
   display:none;
 }
