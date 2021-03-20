@@ -2,7 +2,7 @@
 
 I was debating building something like this in Flask with sockets but stumbled on this lovely project where someone else had the same idea. I'm just forking it as I prefer the saving method from the original but the cursor and formatting from gwynm's fork. I'll also make some tweaks of my own and maybe add a feature to save a specific file by a name at some point. I spent many hours debating which route to take to be able to write on a kindle and this eneded being the easiest and cheapest option. I will be using a raspberry pi, battery pack, travel router, and bluetooth keyboard to make this setup usable anywhere.
 
--- Below is gwynm and shubro's read me
+-- Below is gwynm and shubhro's read me
 
 Paperwrite is a Meteor app that brings distraction-free writing to the Kindle. 
 
