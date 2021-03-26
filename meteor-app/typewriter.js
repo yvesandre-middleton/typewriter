@@ -4,9 +4,11 @@ Texts = new Mongo.Collection("texts");
 var lockWriting = false;
 
 if (Meteor.isServer) {
-  var savePath = process.env.PAPERWRITE_SAVE_PATH;
+  // var savePath = process.env.PAPERWRITE_SAVE_PATH;
+  var savePath = undefined;
+  console.log(savePath)
   if (savePath === undefined) {
-    console.log("Please set PAPERWRITE_SAVE_PATH to somewhere to save the output. Using /tmp until you do.");
+    // console.log("Please set PAPERWRITE_SAVE_PATH to somewhere to save the output. Using /tmp until you do.");
     savePath = "/tmp/";
   }
 
